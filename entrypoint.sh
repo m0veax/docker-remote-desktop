@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+MY_USERNAME="${MY_USERNAME:=ubuntu}"
+MY_PASSWORD="${MY_PASSWORD:=ubuntu}"
+
 # Create the user account
-groupadd --gid 1020 ubuntu
-useradd --shell /bin/bash --uid 1020 --gid 1020 --password $(openssl passwd ubuntu) --create-home --home-dir /home/ubuntu ubuntu
-usermod -aG sudo ubuntu
+groupadd --gid 1020 $MY_USERNAME
+useradd --shell /bin/bash --uid 1020 --gid 1020 --password $(openssl passwd $MY_PASSWORD) --create-home --home-dir /home/$MY_USERNAME $MY_USERNAME
+usermod -aG sudo $MY_USERNAME
 
 # Start xrdp sesman service
 /usr/sbin/xrdp-sesman
